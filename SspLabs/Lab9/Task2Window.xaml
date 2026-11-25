@@ -1,0 +1,31 @@
+<Window x:Class="SspLabs.Lab9.Task2Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пульсар" Height="360" Width="360" Background="White">
+    <Ellipse Width="250" Height="250">
+        <Ellipse.Fill>
+            <RadialGradientBrush>
+                <GradientStop x:Name="Core" Color="Orange" Offset="0"/>
+                <GradientStop x:Name="Edge" Color="Red" Offset="0.1"/>
+                <GradientStop Color="Yellow" Offset="1"/>
+            </RadialGradientBrush>
+        </Ellipse.Fill>
+        <!-- Pulse: the red area grows to the edge and back (yellow → red → yellow), forever. -->
+        <Ellipse.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <ColorAnimation Storyboard.TargetName="Core" Storyboard.TargetProperty="Color"
+                                        To="Red" Duration="0:0:1"/>
+                        <DoubleAnimation Storyboard.TargetName="Edge" Storyboard.TargetProperty="Offset"
+                                         To="0.85" Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Ellipse.Triggers>
+    </Ellipse>
+</Window>

@@ -1,0 +1,64 @@
+<Window x:Class="SspLabs.Lab7.Task4Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SspLabs.Lab7"
+        Title="Графический редактор (привязка данных, без обработчиков)" Height="450" Width="720">
+    <Window.Resources>
+        <!-- Item types match the target property types, so no event handlers are needed. -->
+        <x:Array x:Key="Colors" Type="Color">
+            <Color>Black</Color>
+            <Color>Red</Color>
+            <Color>Green</Color>
+            <Color>Blue</Color>
+            <Color>Orange</Color>
+        </x:Array>
+        <x:Array x:Key="Modes" Type="InkCanvasEditingMode">
+            <InkCanvasEditingMode>Ink</InkCanvasEditingMode>
+            <InkCanvasEditingMode>Select</InkCanvasEditingMode>
+            <InkCanvasEditingMode>EraseByStroke</InkCanvasEditingMode>
+        </x:Array>
+        <local:DrawingAttributesConverter x:Key="ToAttributes"/>
+    </Window.Resources>
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="6">
+            <TextBlock Text="Цвет:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <ComboBox x:Name="ColorBox" Width="110" ItemsSource="{StaticResource Colors}" SelectedIndex="0">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="70" Height="14">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="{Binding}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Text="Размер:" VerticalAlignment="Center" Margin="16,0,4,0"/>
+            <Slider x:Name="SizeSlider" Width="140" Minimum="1" Maximum="40" Value="4" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Value, ElementName=SizeSlider, StringFormat=N0}" Width="24"
+                       VerticalAlignment="Center" Margin="4,0"/>
+
+            <TextBlock Text="Режим:" VerticalAlignment="Center" Margin="16,0,4,0"/>
+            <ListBox x:Name="ModeList" ItemsSource="{StaticResource Modes}" SelectedIndex="0">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
+
+        <Border BorderBrush="Gray" BorderThickness="1" Margin="6,0,6,6">
+            <InkCanvas Background="White" EditingMode="{Binding SelectedItem, ElementName=ModeList}">
+                <InkCanvas.DefaultDrawingAttributes>
+                    <MultiBinding Converter="{StaticResource ToAttributes}">
+                        <Binding Path="SelectedItem" ElementName="ColorBox"/>
+                        <Binding Path="Value" ElementName="SizeSlider"/>
+                    </MultiBinding>
+                </InkCanvas.DefaultDrawingAttributes>
+            </InkCanvas>
+        </Border>
+    </DockPanel>
+</Window>

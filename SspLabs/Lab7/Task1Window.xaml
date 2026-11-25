@@ -1,0 +1,28 @@
+<Window x:Class="SspLabs.Lab7.Task1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Задание 1 — ошибки привязки" Height="380" Width="640">
+    <DockPanel Margin="8">
+        <StackPanel DockPanel.Dock="Top">
+            <TextBox x:Name="Source" Text="Исходный текст" Margin="0,0,0,6"/>
+
+            <TextBlock Text="1) Неверный ElementName (элемента 'Sourse' нет):"/>
+            <TextBlock Text="{Binding Text, ElementName=Sourse}" Background="#FFF0F0" Margin="0,2,0,6"/>
+
+            <TextBlock Text="2) Неверный Path (у TextBox нет свойства 'Txt'):"/>
+            <TextBlock Text="{Binding Txt, ElementName=Source}" Background="#FFF0F0" Margin="0,2,0,6"/>
+
+            <TextBlock Text="3) Верная привязка для сравнения:"/>
+            <TextBlock Text="{Binding Text, ElementName=Source}" Background="#F0FFF0" Margin="0,2,0,6"/>
+
+            <TextBlock TextWrapping="Wrap" Margin="0,4">
+                Сборка проходит без ошибок: XAML-компилятор не проверяет ElementName и Path.
+                Ошибки видны только при запуске — в окне «Вывод» (Вид → Вывод) появляются строки
+                «System.Windows.Data Error: 4» (источник не найден) и «Error: 40» (свойство не найдено).
+                Ниже — те же сообщения, перехваченные в самом приложении:
+            </TextBlock>
+        </StackPanel>
+        <TextBox x:Name="Log" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                 FontFamily="Consolas" FontSize="11"/>
+    </DockPanel>
+</Window>

@@ -6,5 +6,9 @@
     <!-- Each button's Tag is the window type name (relative to the SspLabs namespace) to open. -->
     <StackPanel x:Name="Launcher" Margin="12" ButtonBase.Click="Open_Click">
         <TextBlock Text="Выберите задание:" FontWeight="Bold" Margin="0,0,0,8"/>
+        <TextBlock Text="ЛР 7. Привязка данных" Margin="0,4"/>
+        <Button Content="Задание 1 — неверные ElementName и Path" Tag="Lab7.Task1Window" Margin="0,2"/>
+        <Button Content="Задания 2–3 — TextBox, Slider, размер шрифта" Tag="Lab7.Task2Window" Margin="0,2"/>
+        <Button Content="Задание 4 — графический редактор на привязках" Tag="Lab7.Task4Window" Margin="0,2"/>
     </StackPanel>
 </Window>

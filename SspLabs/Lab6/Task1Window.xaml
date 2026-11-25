@@ -1,0 +1,53 @@
+<Window x:Class="SspLabs.Lab6.Task1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Меню, панель инструментов, строка состояния" Height="300" Width="520">
+    <Window.Resources>
+        <!-- MouseEnter/MouseLeave are direct events, so attach them once via EventSetter. Tag holds the hint text. -->
+        <Style TargetType="MenuItem">
+            <EventSetter Event="MouseEnter" Handler="ShowHint"/>
+            <EventSetter Event="MouseLeave" Handler="ClearHint"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <EventSetter Event="MouseEnter" Handler="ShowHint"/>
+            <EventSetter Event="MouseLeave" Handler="ClearHint"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Файл" Tag="Файл">
+                <MenuItem Header="_Закрыть" Tag="Закрыть окно" Click="Close_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Цвет фона" Tag="Изменить цвет фона окна">
+                <MenuItem Header="Белый" Tag="White" Click="Color_Click"/>
+                <MenuItem Header="Голубой" Tag="LightBlue" Click="Color_Click"/>
+                <MenuItem Header="Зелёный" Tag="LightGreen" Click="Color_Click"/>
+                <MenuItem Header="Розовый" Tag="Pink" Click="Color_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Справка" Tag="Справка">
+                <MenuItem Header="О _разработчике" Tag="Информация о разработчике" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Toolbar buttons duplicate the menu commands -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Белый" Tag="White" Click="Color_Click"/>
+            <Button Content="Голубой" Tag="LightBlue" Click="Color_Click"/>
+            <Button Content="Зелёный" Tag="LightGreen" Click="Color_Click"/>
+            <Button Content="Розовый" Tag="Pink" Click="Color_Click"/>
+            <Separator/>
+            <Button Content="О разработчике" Tag="Информация о разработчике" Click="About_Click"/>
+            <Button Content="Закрыть" Tag="Закрыть окно" Click="Close_Click"/>
+        </ToolBar>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="Status" Text="Готово"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <TextBlock Text="Наведите курсор на пункт меню или кнопку — подсказка появится в строке состояния."
+                   TextWrapping="Wrap" Margin="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </DockPanel>
+</Window>

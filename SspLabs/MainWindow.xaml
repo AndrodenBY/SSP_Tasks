@@ -1,0 +1,10 @@
+﻿<Window x:Class="SspLabs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SSP — лабораторные работы WPF" Height="400" Width="420"
+        WindowStartupLocation="CenterScreen">
+    <!-- Each button's Tag is the window type name (relative to the SspLabs namespace) to open. -->
+    <StackPanel x:Name="Launcher" Margin="12" ButtonBase.Click="Open_Click">
+        <TextBlock Text="Выберите задание:" FontWeight="Bold" Margin="0,0,0,8"/>
+    </StackPanel>
+</Window>

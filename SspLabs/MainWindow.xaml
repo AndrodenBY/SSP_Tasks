@@ -6,5 +6,8 @@
     <!-- Each button's Tag is the window type name (relative to the SspLabs namespace) to open. -->
     <StackPanel x:Name="Launcher" Margin="12" ButtonBase.Click="Open_Click">
         <TextBlock Text="Выберите задание:" FontWeight="Bold" Margin="0,0,0,8"/>
+        <TextBlock Text="ЛР 5. Диспетчеры компоновки" Margin="0,4"/>
+        <Button Content="Задание 1 — Grid / DockPanel / WrapPanel" Tag="Lab5.Task1Window" Margin="0,2"/>
+        <Button Content="Задание 2 — две группы WrapPanel" Tag="Lab5.Task2Window" Margin="0,2"/>
     </StackPanel>
 </Window>
